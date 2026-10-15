@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $correctUsername = "abbas";
     $correctPassword = "12345";
@@ -8,7 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $password = $_POST['password'];
 
     if ($username === $correctUsername && $password === $correctPassword){
-        header("Location: dashboard.php?username=" . urlencode($username));
+
+        $_SESSION["username"] = $username;
+        // header("Location: dashboard.php?username=" . urlencode($username));
+        header("Location: dashboard.php");
+        exit;
     }
     else{
         $error = "Incorrect username or password!";

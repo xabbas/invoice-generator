@@ -1,5 +1,13 @@
 <?php
-$username = $_GET["username"] ?? "Guest";
+// $username = $_GET["username"] ?? "Guest";
+session_start();
+
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php");
+    exit();
+}
+
+$username = $_SESSION["username"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +17,8 @@ $username = $_GET["username"] ?? "Guest";
     <title>User Dashboard</title>
 </head>
 <body>
-    <h1>Welcome <?= htmlspecialchars($username, ENT_QUOTES, "UTF-8")?>!</h1>
+    <h1>Welcome <?= htmlspecialchars($username, ENT_QUOTES, "UTF-8") ?>!</h1>
+    <br><br>
+    <a href="logout.php">Log out</a>
 </body>
 </html>
